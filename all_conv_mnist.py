@@ -51,8 +51,8 @@ h_pool1 = tf.nn.relu(pool_2x2(h_conv1, W_pool1) + b_pool1)
 h_conv2 = tf.nn.relu(conv2d(h_pool1, W_conv2) + b_conv2)
 h_pool2 = tf.nn.relu(pool_2x2(h_conv2, W_pool2) + b_pool2)
 
-W_fc1 = weight_variable([1, 1, 64, 64])
-b_fc1 = bias_variable([64])
+W_fc1 = weight_variable([1, 1, 64, 1024])
+b_fc1 = bias_variable([1024])
 
 #h_conv2_flat = tf.reshape(h_pool2, [-1, 7*7*64])
 h_fc1 = tf.nn.relu(conv2d(h_pool2, W_fc1) + b_fc1)
@@ -60,7 +60,7 @@ h_fc1 = tf.nn.relu(conv2d(h_pool2, W_fc1) + b_fc1)
 keep_prob = tf.placeholder(tf.float32)
 h_fc1_drop = tf.nn.dropout(h_fc1, keep_prob)
 
-W_fc2 = weight_variable([1, 1, 64, 10])
+W_fc2 = weight_variable([1, 1, 1024, 10])
 b_fc2 = bias_variable([10])
 
 h_fc3=tf.nn.relu(conv2d(h_fc1_drop, W_fc2) + b_fc2)
